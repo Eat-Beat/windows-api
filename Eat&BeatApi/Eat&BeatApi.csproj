@@ -77,6 +77,7 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Security" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.6.0\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
@@ -172,10 +173,59 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Clases\Musician.cs" />
+    <Compile Include="Clases\Utilitat.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\musiciansController.cs" />
+    <Compile Include="Controllers\restaurantsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\chat.cs">
+      <DependentUpon>ModelEatBeat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\classification.cs">
+      <DependentUpon>ModelEatBeat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\genre.cs">
+      <DependentUpon>ModelEatBeat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelEatBeat.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelEatBeat.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelEatBeat.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelEatBeat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelEatBeat.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelEatBeat.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\multimedia.cs">
+      <DependentUpon>ModelEatBeat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\multimedia_type.cs">
+      <DependentUpon>ModelEatBeat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\musician.cs">
+      <DependentUpon>ModelEatBeat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\perform.cs">
+      <DependentUpon>ModelEatBeat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\restaurant.cs">
+      <DependentUpon>ModelEatBeat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rol.cs">
+      <DependentUpon>ModelEatBeat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\user.cs">
+      <DependentUpon>ModelEatBeat.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -199,6 +249,16 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Models\ModelEatBeat.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelEatBeat.edmx</DependentUpon>
+      <LastGenOutput>ModelEatBeat.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ModelEatBeat.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelEatBeat.edmx</DependentUpon>
+      <LastGenOutput>ModelEatBeat.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -224,6 +284,13 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <EntityDeploy Include="Models\ModelEatBeat.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelEatBeat.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ModelEatBeat.edmx.diagram">
+      <DependentUpon>ModelEatBeat.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -247,7 +314,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -275,6 +341,9 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

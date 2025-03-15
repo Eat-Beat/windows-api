@@ -11,6 +11,13 @@ namespace Eat_BeatApi
         {
             // Configuración y servicios de Web API
 
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+
+            var json = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
+
+            json.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None;
+
             // Rutas de Web API
             config.MapHttpAttributeRoutes();
 
