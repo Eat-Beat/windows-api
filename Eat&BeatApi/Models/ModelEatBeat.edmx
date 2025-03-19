@@ -18,10 +18,9 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
           <Property Name="idRestaurant" Type="int" Nullable="false" />
           <Property Name="idMusician" Type="int" Nullable="false" />
           <Property Name="idSender" Type="int" Nullable="false" />
+          <Property Name="isMultimedia" Type="bit" />
           <Property Name="message" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="timestamp" Type="datetime" Nullable="false" />
-          <Property Name="sent" Type="bit" />
-          <Property Name="read" Type="bit" />
         </EntityType>
         <EntityType Name="classification">
           <Key>
@@ -46,7 +45,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
           <Property Name="idMultimedia" Type="int" Nullable="false" />
           <Property Name="idMultimediaType" Type="int" Nullable="false" />
           <Property Name="url" Type="varchar" MaxLength="2083" Nullable="false" />
-          <Property Name="size" Type="varchar" MaxLength="20" />
+          <Property Name="size" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="multimedia_type">
           <Key>
@@ -118,7 +117,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
           <Property Name="password" Type="varchar" MaxLength="256" Nullable="false" />
           <Property Name="idRol" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__chat__idMusician__46486B8E">
+        <Association Name="FK__chat__idMusician__6C6E1476">
           <End Role="musician" Type="Self.musician" Multiplicity="1" />
           <End Role="chat" Type="Self.chat" Multiplicity="*" />
           <ReferentialConstraint>
@@ -130,7 +129,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__chat__idRestaura__45544755">
+        <Association Name="FK__chat__idRestaura__6B79F03D">
           <End Role="restaurant" Type="Self.restaurant" Multiplicity="1" />
           <End Role="chat" Type="Self.chat" Multiplicity="*" />
           <ReferentialConstraint>
@@ -142,7 +141,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__chat__idSender__473C8FC7">
+        <Association Name="FK__chat__idSender__6D6238AF">
           <End Role="user" Type="Self.user" Multiplicity="1" />
           <End Role="chat" Type="Self.chat" Multiplicity="*" />
           <ReferentialConstraint>
@@ -154,7 +153,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__multimedi__idMul__4CF5691D">
+        <Association Name="FK__multimedi__idMul__731B1205">
           <End Role="multimedia_type" Type="Self.multimedia_type" Multiplicity="1" />
           <End Role="multimedia" Type="Self.multimedia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -166,7 +165,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__multimedi__idUse__4C0144E4">
+        <Association Name="FK__multimedi__idUse__7226EDCC">
           <End Role="user" Type="Self.user" Multiplicity="1" />
           <End Role="multimedia" Type="Self.multimedia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -178,7 +177,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__musician___idCla__3BCADD1B">
+        <Association Name="FK__musician___idCla__62E4AA3C">
           <End Role="classification" Type="Self.classification" Multiplicity="1" />
           <End Role="musician_classification" Type="Self.musician_classification" Multiplicity="*" />
           <ReferentialConstraint>
@@ -190,7 +189,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__musician___idGen__361203C5">
+        <Association Name="FK__musician___idGen__5D2BD0E6">
           <End Role="genre" Type="Self.genre" Multiplicity="1" />
           <End Role="musician_genre" Type="Self.musician_genre" Multiplicity="*" />
           <ReferentialConstraint>
@@ -202,7 +201,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__musician___idMus__351DDF8C">
+        <Association Name="FK__musician___idMus__5C37ACAD">
           <End Role="musician" Type="Self.musician" Multiplicity="1" />
           <End Role="musician_genre" Type="Self.musician_genre" Multiplicity="*" />
           <ReferentialConstraint>
@@ -214,7 +213,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__musician___idMus__3AD6B8E2">
+        <Association Name="FK__musician___idMus__61F08603">
           <End Role="musician" Type="Self.musician" Multiplicity="1" />
           <End Role="musician_classification" Type="Self.musician_classification" Multiplicity="*" />
           <ReferentialConstraint>
@@ -226,7 +225,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__musician__idUser__324172E1">
+        <Association Name="FK__musician__idUser__595B4002">
           <End Role="user" Type="Self.user" Multiplicity="1" />
           <End Role="musician" Type="Self.musician" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -238,7 +237,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__perform__idMusic__4183B671">
+        <Association Name="FK__perform__idMusic__689D8392">
           <End Role="musician" Type="Self.musician" Multiplicity="1" />
           <End Role="perform" Type="Self.perform" Multiplicity="*" />
           <ReferentialConstraint>
@@ -250,7 +249,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__perform__idResta__408F9238">
+        <Association Name="FK__perform__idResta__67A95F59">
           <End Role="restaurant" Type="Self.restaurant" Multiplicity="1" />
           <End Role="perform" Type="Self.perform" Multiplicity="*" />
           <ReferentialConstraint>
@@ -262,7 +261,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__restauran__idUse__2D7CBDC4">
+        <Association Name="FK__restauran__idUse__54968AE5">
           <End Role="user" Type="Self.user" Multiplicity="1" />
           <End Role="restaurant" Type="Self.restaurant" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -274,7 +273,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__user__idRol__2AA05119">
+        <Association Name="FK__user__idRol__51BA1E3A">
           <End Role="rol" Type="Self.rol" Multiplicity="1" />
           <End Role="user" Type="Self.user" Multiplicity="*" />
           <ReferentialConstraint>
@@ -303,65 +302,64 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
     [chat].[idRestaurant] AS [idRestaurant], 
     [chat].[idMusician] AS [idMusician], 
     [chat].[idSender] AS [idSender], 
+    [chat].[isMultimedia] AS [isMultimedia], 
     [chat].[message] AS [message], 
-    [chat].[timestamp] AS [timestamp], 
-    [chat].[sent] AS [sent], 
-    [chat].[read] AS [read]
+    [chat].[timestamp] AS [timestamp]
     FROM [dbo].[chat] AS [chat]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__chat__idMusician__46486B8E" Association="Self.FK__chat__idMusician__46486B8E">
+          <AssociationSet Name="FK__chat__idMusician__6C6E1476" Association="Self.FK__chat__idMusician__6C6E1476">
             <End Role="musician" EntitySet="musician" />
             <End Role="chat" EntitySet="chat" />
           </AssociationSet>
-          <AssociationSet Name="FK__chat__idRestaura__45544755" Association="Self.FK__chat__idRestaura__45544755">
+          <AssociationSet Name="FK__chat__idRestaura__6B79F03D" Association="Self.FK__chat__idRestaura__6B79F03D">
             <End Role="restaurant" EntitySet="restaurant" />
             <End Role="chat" EntitySet="chat" />
           </AssociationSet>
-          <AssociationSet Name="FK__chat__idSender__473C8FC7" Association="Self.FK__chat__idSender__473C8FC7">
+          <AssociationSet Name="FK__chat__idSender__6D6238AF" Association="Self.FK__chat__idSender__6D6238AF">
             <End Role="user" EntitySet="user" />
             <End Role="chat" EntitySet="chat" />
           </AssociationSet>
-          <AssociationSet Name="FK__multimedi__idMul__4CF5691D" Association="Self.FK__multimedi__idMul__4CF5691D">
+          <AssociationSet Name="FK__multimedi__idMul__731B1205" Association="Self.FK__multimedi__idMul__731B1205">
             <End Role="multimedia_type" EntitySet="multimedia_type" />
             <End Role="multimedia" EntitySet="multimedia" />
           </AssociationSet>
-          <AssociationSet Name="FK__multimedi__idUse__4C0144E4" Association="Self.FK__multimedi__idUse__4C0144E4">
+          <AssociationSet Name="FK__multimedi__idUse__7226EDCC" Association="Self.FK__multimedi__idUse__7226EDCC">
             <End Role="user" EntitySet="user" />
             <End Role="multimedia" EntitySet="multimedia" />
           </AssociationSet>
-          <AssociationSet Name="FK__musician___idCla__3BCADD1B" Association="Self.FK__musician___idCla__3BCADD1B">
+          <AssociationSet Name="FK__musician___idCla__62E4AA3C" Association="Self.FK__musician___idCla__62E4AA3C">
             <End Role="classification" EntitySet="classification" />
             <End Role="musician_classification" EntitySet="musician_classification" />
           </AssociationSet>
-          <AssociationSet Name="FK__musician___idGen__361203C5" Association="Self.FK__musician___idGen__361203C5">
+          <AssociationSet Name="FK__musician___idGen__5D2BD0E6" Association="Self.FK__musician___idGen__5D2BD0E6">
             <End Role="genre" EntitySet="genre" />
             <End Role="musician_genre" EntitySet="musician_genre" />
           </AssociationSet>
-          <AssociationSet Name="FK__musician___idMus__351DDF8C" Association="Self.FK__musician___idMus__351DDF8C">
+          <AssociationSet Name="FK__musician___idMus__5C37ACAD" Association="Self.FK__musician___idMus__5C37ACAD">
             <End Role="musician" EntitySet="musician" />
             <End Role="musician_genre" EntitySet="musician_genre" />
           </AssociationSet>
-          <AssociationSet Name="FK__musician___idMus__3AD6B8E2" Association="Self.FK__musician___idMus__3AD6B8E2">
+          <AssociationSet Name="FK__musician___idMus__61F08603" Association="Self.FK__musician___idMus__61F08603">
             <End Role="musician" EntitySet="musician" />
             <End Role="musician_classification" EntitySet="musician_classification" />
           </AssociationSet>
-          <AssociationSet Name="FK__musician__idUser__324172E1" Association="Self.FK__musician__idUser__324172E1">
+          <AssociationSet Name="FK__musician__idUser__595B4002" Association="Self.FK__musician__idUser__595B4002">
             <End Role="user" EntitySet="user" />
             <End Role="musician" EntitySet="musician" />
           </AssociationSet>
-          <AssociationSet Name="FK__perform__idMusic__4183B671" Association="Self.FK__perform__idMusic__4183B671">
+          <AssociationSet Name="FK__perform__idMusic__689D8392" Association="Self.FK__perform__idMusic__689D8392">
             <End Role="musician" EntitySet="musician" />
             <End Role="perform" EntitySet="perform" />
           </AssociationSet>
-          <AssociationSet Name="FK__perform__idResta__408F9238" Association="Self.FK__perform__idResta__408F9238">
+          <AssociationSet Name="FK__perform__idResta__67A95F59" Association="Self.FK__perform__idResta__67A95F59">
             <End Role="restaurant" EntitySet="restaurant" />
             <End Role="perform" EntitySet="perform" />
           </AssociationSet>
-          <AssociationSet Name="FK__restauran__idUse__2D7CBDC4" Association="Self.FK__restauran__idUse__2D7CBDC4">
+          <AssociationSet Name="FK__restauran__idUse__54968AE5" Association="Self.FK__restauran__idUse__54968AE5">
             <End Role="user" EntitySet="user" />
             <End Role="restaurant" EntitySet="restaurant" />
           </AssociationSet>
-          <AssociationSet Name="FK__user__idRol__2AA05119" Association="Self.FK__user__idRol__2AA05119">
+          <AssociationSet Name="FK__user__idRol__51BA1E3A" Association="Self.FK__user__idRol__51BA1E3A">
             <End Role="rol" EntitySet="rol" />
             <End Role="user" EntitySet="user" />
           </AssociationSet>
@@ -396,9 +394,9 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
           <Property Name="idMultimedia" Type="Int32" Nullable="false" />
           <Property Name="idMultimediaType" Type="Int32" Nullable="false" />
           <Property Name="url" Type="String" MaxLength="2083" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="size" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="multimedia_type" Relationship="Self.FK__multimedi__idMul__4CF5691D" FromRole="multimedia" ToRole="multimedia_type" />
-          <NavigationProperty Name="user" Relationship="Self.FK__multimedi__idUse__4C0144E4" FromRole="multimedia" ToRole="user" />
+          <Property Name="size" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="multimedia_type" Relationship="Self.FK__multimedi__idMul__731B1205" FromRole="multimedia" ToRole="multimedia_type" />
+          <NavigationProperty Name="user" Relationship="Self.FK__multimedi__idUse__7226EDCC" FromRole="multimedia" ToRole="user" />
         </EntityType>
         <EntityType Name="multimedia_type">
           <Key>
@@ -406,7 +404,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
           </Key>
           <Property Name="idMultimediaType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="multimedia" Relationship="Self.FK__multimedi__idMul__4CF5691D" FromRole="multimedia_type" ToRole="multimedia" />
+          <NavigationProperty Name="multimedia" Relationship="Self.FK__multimedi__idMul__731B1205" FromRole="multimedia_type" ToRole="multimedia" />
         </EntityType>
         <EntityType Name="musician">
           <Key>
@@ -416,9 +414,9 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
           <Property Name="longitude" Type="Decimal" Precision="9" Scale="6" />
           <Property Name="latitude" Type="Decimal" Precision="9" Scale="6" />
           <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="chat" Relationship="Self.FK__chat__idMusician__46486B8E" FromRole="musician" ToRole="chat" />
-          <NavigationProperty Name="user" Relationship="Self.FK__musician__idUser__324172E1" FromRole="musician" ToRole="user" />
-          <NavigationProperty Name="perform" Relationship="Self.FK__perform__idMusic__4183B671" FromRole="musician" ToRole="perform" />
+          <NavigationProperty Name="chat" Relationship="Self.FK__chat__idMusician__6C6E1476" FromRole="musician" ToRole="chat" />
+          <NavigationProperty Name="user" Relationship="Self.FK__musician__idUser__595B4002" FromRole="musician" ToRole="user" />
+          <NavigationProperty Name="perform" Relationship="Self.FK__perform__idMusic__689D8392" FromRole="musician" ToRole="perform" />
           <NavigationProperty Name="classification" Relationship="Self.musician_classification" FromRole="musician" ToRole="classification" />
           <NavigationProperty Name="genre" Relationship="Self.musician_genre" FromRole="musician" ToRole="genre" />
         </EntityType>
@@ -433,8 +431,8 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
           <Property Name="budget" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="musicianRate" Type="Byte" />
           <Property Name="restaurantRate" Type="Byte" />
-          <NavigationProperty Name="musician" Relationship="Self.FK__perform__idMusic__4183B671" FromRole="perform" ToRole="musician" />
-          <NavigationProperty Name="restaurant" Relationship="Self.FK__perform__idResta__408F9238" FromRole="perform" ToRole="restaurant" />
+          <NavigationProperty Name="musician" Relationship="Self.FK__perform__idMusic__689D8392" FromRole="perform" ToRole="musician" />
+          <NavigationProperty Name="restaurant" Relationship="Self.FK__perform__idResta__67A95F59" FromRole="perform" ToRole="restaurant" />
         </EntityType>
         <EntityType Name="restaurant">
           <Key>
@@ -444,9 +442,9 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
           <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="addressNum" Type="Int32" Nullable="false" />
           <Property Name="zipCode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="perform" Relationship="Self.FK__perform__idResta__408F9238" FromRole="restaurant" ToRole="perform" />
-          <NavigationProperty Name="chat" Relationship="Self.FK__chat__idRestaura__45544755" FromRole="restaurant" ToRole="chat" />
-          <NavigationProperty Name="user" Relationship="Self.FK__restauran__idUse__2D7CBDC4" FromRole="restaurant" ToRole="user" />
+          <NavigationProperty Name="perform" Relationship="Self.FK__perform__idResta__67A95F59" FromRole="restaurant" ToRole="perform" />
+          <NavigationProperty Name="chat" Relationship="Self.FK__chat__idRestaura__6B79F03D" FromRole="restaurant" ToRole="chat" />
+          <NavigationProperty Name="user" Relationship="Self.FK__restauran__idUse__54968AE5" FromRole="restaurant" ToRole="user" />
         </EntityType>
         <EntityType Name="rol">
           <Key>
@@ -454,7 +452,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
           </Key>
           <Property Name="idRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="user" Relationship="Self.FK__user__idRol__2AA05119" FromRole="rol" ToRole="user" />
+          <NavigationProperty Name="user" Relationship="Self.FK__user__idRol__51BA1E3A" FromRole="rol" ToRole="user" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -465,11 +463,11 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="idRol" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="multimedia" Relationship="Self.FK__multimedi__idUse__4C0144E4" FromRole="user" ToRole="multimedia" />
-          <NavigationProperty Name="musician" Relationship="Self.FK__musician__idUser__324172E1" FromRole="user" ToRole="musician" />
-          <NavigationProperty Name="restaurant" Relationship="Self.FK__restauran__idUse__2D7CBDC4" FromRole="user" ToRole="restaurant" />
-          <NavigationProperty Name="rol" Relationship="Self.FK__user__idRol__2AA05119" FromRole="user" ToRole="rol" />
-          <NavigationProperty Name="chat" Relationship="Self.FK__chat__idSender__473C8FC7" FromRole="user" ToRole="chat" />
+          <NavigationProperty Name="multimedia" Relationship="Self.FK__multimedi__idUse__7226EDCC" FromRole="user" ToRole="multimedia" />
+          <NavigationProperty Name="musician" Relationship="Self.FK__musician__idUser__595B4002" FromRole="user" ToRole="musician" />
+          <NavigationProperty Name="restaurant" Relationship="Self.FK__restauran__idUse__54968AE5" FromRole="user" ToRole="restaurant" />
+          <NavigationProperty Name="rol" Relationship="Self.FK__user__idRol__51BA1E3A" FromRole="user" ToRole="rol" />
+          <NavigationProperty Name="chat" Relationship="Self.FK__chat__idSender__6D6238AF" FromRole="user" ToRole="chat" />
         </EntityType>
         <EntityType Name="chat">
           <Key>
@@ -482,15 +480,14 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
           <Property Name="idRestaurant" Type="Int32" Nullable="false" />
           <Property Name="idMusician" Type="Int32" Nullable="false" />
           <Property Name="idSender" Type="Int32" Nullable="false" />
+          <Property Name="isMultimedia" Type="Boolean" />
           <Property Name="message" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="sent" Type="Boolean" />
-          <Property Name="read" Type="Boolean" />
-          <NavigationProperty Name="musician" Relationship="Self.FK__chat__idMusician__46486B8E" FromRole="chat" ToRole="musician" />
-          <NavigationProperty Name="restaurant" Relationship="Self.FK__chat__idRestaura__45544755" FromRole="chat" ToRole="restaurant" />
-          <NavigationProperty Name="user" Relationship="Self.FK__chat__idSender__473C8FC7" FromRole="chat" ToRole="user" />
+          <NavigationProperty Name="musician" Relationship="Self.FK__chat__idMusician__6C6E1476" FromRole="chat" ToRole="musician" />
+          <NavigationProperty Name="restaurant" Relationship="Self.FK__chat__idRestaura__6B79F03D" FromRole="chat" ToRole="restaurant" />
+          <NavigationProperty Name="user" Relationship="Self.FK__chat__idSender__6D6238AF" FromRole="chat" ToRole="user" />
         </EntityType>
-        <Association Name="FK__multimedi__idMul__4CF5691D">
+        <Association Name="FK__multimedi__idMul__731B1205">
           <End Role="multimedia_type" Type="Self.multimedia_type" Multiplicity="1" />
           <End Role="multimedia" Type="Self.multimedia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -502,7 +499,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__multimedi__idUse__4C0144E4">
+        <Association Name="FK__multimedi__idUse__7226EDCC">
           <End Role="user" Type="Self.user" Multiplicity="1" />
           <End Role="multimedia" Type="Self.multimedia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -514,7 +511,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__chat__idMusician__46486B8E">
+        <Association Name="FK__chat__idMusician__6C6E1476">
           <End Role="musician" Type="Self.musician" Multiplicity="1" />
           <End Role="chat" Type="Self.chat" Multiplicity="*" />
           <ReferentialConstraint>
@@ -526,7 +523,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__musician__idUser__324172E1">
+        <Association Name="FK__musician__idUser__595B4002">
           <End Role="user" Type="Self.user" Multiplicity="1" />
           <End Role="musician" Type="Self.musician" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -538,7 +535,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__perform__idMusic__4183B671">
+        <Association Name="FK__perform__idMusic__689D8392">
           <End Role="musician" Type="Self.musician" Multiplicity="1" />
           <End Role="perform" Type="Self.perform" Multiplicity="*" />
           <ReferentialConstraint>
@@ -550,7 +547,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__perform__idResta__408F9238">
+        <Association Name="FK__perform__idResta__67A95F59">
           <End Role="restaurant" Type="Self.restaurant" Multiplicity="1" />
           <End Role="perform" Type="Self.perform" Multiplicity="*" />
           <ReferentialConstraint>
@@ -562,7 +559,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__chat__idRestaura__45544755">
+        <Association Name="FK__chat__idRestaura__6B79F03D">
           <End Role="restaurant" Type="Self.restaurant" Multiplicity="1" />
           <End Role="chat" Type="Self.chat" Multiplicity="*" />
           <ReferentialConstraint>
@@ -574,7 +571,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__restauran__idUse__2D7CBDC4">
+        <Association Name="FK__restauran__idUse__54968AE5">
           <End Role="user" Type="Self.user" Multiplicity="1" />
           <End Role="restaurant" Type="Self.restaurant" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -586,7 +583,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__user__idRol__2AA05119">
+        <Association Name="FK__user__idRol__51BA1E3A">
           <End Role="rol" Type="Self.rol" Multiplicity="1" />
           <End Role="user" Type="Self.user" Multiplicity="*" />
           <ReferentialConstraint>
@@ -598,7 +595,7 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__chat__idSender__473C8FC7">
+        <Association Name="FK__chat__idSender__6D6238AF">
           <End Role="user" Type="Self.user" Multiplicity="1" />
           <End Role="chat" Type="Self.chat" Multiplicity="*" />
           <ReferentialConstraint>
@@ -629,43 +626,43 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
           <EntitySet Name="rol" EntityType="Self.rol" />
           <EntitySet Name="user" EntityType="Self.user" />
           <EntitySet Name="chat" EntityType="Self.chat" />
-          <AssociationSet Name="FK__multimedi__idMul__4CF5691D" Association="Self.FK__multimedi__idMul__4CF5691D">
+          <AssociationSet Name="FK__multimedi__idMul__731B1205" Association="Self.FK__multimedi__idMul__731B1205">
             <End Role="multimedia_type" EntitySet="multimedia_type" />
             <End Role="multimedia" EntitySet="multimedia" />
           </AssociationSet>
-          <AssociationSet Name="FK__multimedi__idUse__4C0144E4" Association="Self.FK__multimedi__idUse__4C0144E4">
+          <AssociationSet Name="FK__multimedi__idUse__7226EDCC" Association="Self.FK__multimedi__idUse__7226EDCC">
             <End Role="user" EntitySet="user" />
             <End Role="multimedia" EntitySet="multimedia" />
           </AssociationSet>
-          <AssociationSet Name="FK__chat__idMusician__46486B8E" Association="Self.FK__chat__idMusician__46486B8E">
+          <AssociationSet Name="FK__chat__idMusician__6C6E1476" Association="Self.FK__chat__idMusician__6C6E1476">
             <End Role="musician" EntitySet="musician" />
             <End Role="chat" EntitySet="chat" />
           </AssociationSet>
-          <AssociationSet Name="FK__musician__idUser__324172E1" Association="Self.FK__musician__idUser__324172E1">
+          <AssociationSet Name="FK__musician__idUser__595B4002" Association="Self.FK__musician__idUser__595B4002">
             <End Role="user" EntitySet="user" />
             <End Role="musician" EntitySet="musician" />
           </AssociationSet>
-          <AssociationSet Name="FK__perform__idMusic__4183B671" Association="Self.FK__perform__idMusic__4183B671">
+          <AssociationSet Name="FK__perform__idMusic__689D8392" Association="Self.FK__perform__idMusic__689D8392">
             <End Role="musician" EntitySet="musician" />
             <End Role="perform" EntitySet="perform" />
           </AssociationSet>
-          <AssociationSet Name="FK__perform__idResta__408F9238" Association="Self.FK__perform__idResta__408F9238">
+          <AssociationSet Name="FK__perform__idResta__67A95F59" Association="Self.FK__perform__idResta__67A95F59">
             <End Role="restaurant" EntitySet="restaurant" />
             <End Role="perform" EntitySet="perform" />
           </AssociationSet>
-          <AssociationSet Name="FK__chat__idRestaura__45544755" Association="Self.FK__chat__idRestaura__45544755">
+          <AssociationSet Name="FK__chat__idRestaura__6B79F03D" Association="Self.FK__chat__idRestaura__6B79F03D">
             <End Role="restaurant" EntitySet="restaurant" />
             <End Role="chat" EntitySet="chat" />
           </AssociationSet>
-          <AssociationSet Name="FK__restauran__idUse__2D7CBDC4" Association="Self.FK__restauran__idUse__2D7CBDC4">
+          <AssociationSet Name="FK__restauran__idUse__54968AE5" Association="Self.FK__restauran__idUse__54968AE5">
             <End Role="user" EntitySet="user" />
             <End Role="restaurant" EntitySet="restaurant" />
           </AssociationSet>
-          <AssociationSet Name="FK__user__idRol__2AA05119" Association="Self.FK__user__idRol__2AA05119">
+          <AssociationSet Name="FK__user__idRol__51BA1E3A" Association="Self.FK__user__idRol__51BA1E3A">
             <End Role="rol" EntitySet="rol" />
             <End Role="user" EntitySet="user" />
           </AssociationSet>
-          <AssociationSet Name="FK__chat__idSender__473C8FC7" Association="Self.FK__chat__idSender__473C8FC7">
+          <AssociationSet Name="FK__chat__idSender__6D6238AF" Association="Self.FK__chat__idSender__6D6238AF">
             <End Role="user" EntitySet="user" />
             <End Role="chat" EntitySet="chat" />
           </AssociationSet>
@@ -777,10 +774,9 @@ advertencia 6002: La tabla o vista 'eat&beat.dbo.chat' no tiene definida ninguna
                 <ScalarProperty Name="idRestaurant" ColumnName="idRestaurant" />
                 <ScalarProperty Name="idMusician" ColumnName="idMusician" />
                 <ScalarProperty Name="idSender" ColumnName="idSender" />
+                <ScalarProperty Name="isMultimedia" ColumnName="isMultimedia" />
                 <ScalarProperty Name="message" ColumnName="message" />
                 <ScalarProperty Name="timestamp" ColumnName="timestamp" />
-                <ScalarProperty Name="sent" ColumnName="sent" />
-                <ScalarProperty Name="read" ColumnName="read" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

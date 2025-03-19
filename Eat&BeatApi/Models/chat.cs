@@ -17,10 +17,9 @@ namespace Eat_BeatApi.Models
         public int idRestaurant { get; set; }
         public int idMusician { get; set; }
         public int idSender { get; set; }
+        public Nullable<bool> isMultimedia { get; set; }
         public string message { get; set; }
         public System.DateTime timestamp { get; set; }
-        public Nullable<bool> sent { get; set; }
-        public Nullable<bool> read { get; set; }
     
         public virtual musician musician { get; set; }
         public virtual restaurant restaurant { get; set; }

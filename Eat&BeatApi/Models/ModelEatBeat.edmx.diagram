@@ -4,27 +4,27 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cf4a9b812a9843e6babcc12d619e4e4a" Name="Diagram1">
-        <EntityTypeShape EntityType="eatbeatModel.classification" Width="1.5" PointX="6" PointY="3.875" IsExpanded="true" />
+      <Diagram DiagramId="5de5cf1e262d419fbef4b525d57f20c0" Name="Diagram1">
+        <EntityTypeShape EntityType="eatbeatModel.classification" Width="1.5" PointX="6" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="eatbeatModel.genre" Width="1.5" PointX="6" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="eatbeatModel.multimedia" Width="1.5" PointX="5.25" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="eatbeatModel.multimedia_type" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="eatbeatModel.multimedia" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="eatbeatModel.multimedia_type" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="eatbeatModel.musician" Width="1.5" PointX="8.25" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="eatbeatModel.perform" Width="1.5" PointX="10.5" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="eatbeatModel.restaurant" Width="1.5" PointX="5.25" PointY="13.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="eatbeatModel.rol" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="eatbeatModel.user" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="eatbeatModel.perform" Width="1.5" PointX="10.5" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="eatbeatModel.restaurant" Width="1.5" PointX="5.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="eatbeatModel.rol" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="eatbeatModel.user" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
         <EntityTypeShape EntityType="eatbeatModel.chat" Width="1.5" PointX="13.5" PointY="9.5" IsExpanded="true" />
-        <AssociationConnector Association="eatbeatModel.FK__multimedi__idMul__4CF5691D" ManuallyRouted="false" />
-        <AssociationConnector Association="eatbeatModel.FK__multimedi__idUse__4C0144E4" ManuallyRouted="false" />
-        <AssociationConnector Association="eatbeatModel.FK__chat__idMusician__46486B8E" ManuallyRouted="false" />
-        <AssociationConnector Association="eatbeatModel.FK__musician__idUser__324172E1" ManuallyRouted="false" />
-        <AssociationConnector Association="eatbeatModel.FK__perform__idMusic__4183B671" ManuallyRouted="false" />
-        <AssociationConnector Association="eatbeatModel.FK__perform__idResta__408F9238" ManuallyRouted="false" />
-        <AssociationConnector Association="eatbeatModel.FK__chat__idRestaura__45544755" ManuallyRouted="false" />
-        <AssociationConnector Association="eatbeatModel.FK__restauran__idUse__2D7CBDC4" ManuallyRouted="false" />
-        <AssociationConnector Association="eatbeatModel.FK__user__idRol__2AA05119" ManuallyRouted="false" />
-        <AssociationConnector Association="eatbeatModel.FK__chat__idSender__473C8FC7" ManuallyRouted="false" />
+        <AssociationConnector Association="eatbeatModel.FK__multimedi__idMul__731B1205" ManuallyRouted="false" />
+        <AssociationConnector Association="eatbeatModel.FK__multimedi__idUse__7226EDCC" ManuallyRouted="false" />
+        <AssociationConnector Association="eatbeatModel.FK__chat__idMusician__6C6E1476" ManuallyRouted="false" />
+        <AssociationConnector Association="eatbeatModel.FK__musician__idUser__595B4002" ManuallyRouted="false" />
+        <AssociationConnector Association="eatbeatModel.FK__perform__idMusic__689D8392" ManuallyRouted="false" />
+        <AssociationConnector Association="eatbeatModel.FK__perform__idResta__67A95F59" ManuallyRouted="false" />
+        <AssociationConnector Association="eatbeatModel.FK__chat__idRestaura__6B79F03D" ManuallyRouted="false" />
+        <AssociationConnector Association="eatbeatModel.FK__restauran__idUse__54968AE5" ManuallyRouted="false" />
+        <AssociationConnector Association="eatbeatModel.FK__user__idRol__51BA1E3A" ManuallyRouted="false" />
+        <AssociationConnector Association="eatbeatModel.FK__chat__idSender__6D6238AF" ManuallyRouted="false" />
         <AssociationConnector Association="eatbeatModel.musician_classification" ManuallyRouted="false" />
         <AssociationConnector Association="eatbeatModel.musician_genre" ManuallyRouted="false" />
       </Diagram>
