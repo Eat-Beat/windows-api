@@ -17,6 +17,7 @@ namespace Eat_BeatApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public user()
         {
+            this.multimedia = new HashSet<multimedia>();
             this.chat = new HashSet<chat>();
         }
     
@@ -26,11 +27,12 @@ namespace Eat_BeatApi.Models
         public string password { get; set; }
         public int idRol { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<multimedia> multimedia { get; set; }
         public virtual musician musician { get; set; }
         public virtual restaurant restaurant { get; set; }
         public virtual rol rol { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<chat> chat { get; set; }
-        public virtual rol rol1 { get; set; }
     }
 }

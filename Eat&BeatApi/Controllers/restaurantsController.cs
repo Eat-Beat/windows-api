@@ -29,6 +29,7 @@ namespace Eat_BeatApi.Controllers
                 .Select(r => new
                 {
                     idUser = r.user.idUser,
+                    idRol = r.user.idRol,
                     name = r.user.name,
                     email = r.user.email,
                     password = r.user.password,
@@ -54,6 +55,7 @@ namespace Eat_BeatApi.Controllers
             .Select(r => new
             {
                 idUser = r.user.idUser,
+                idRol = r.user.idRol,
                 name = r.user.name,
                 email = r.user.email,
                 password = r.user.password, 

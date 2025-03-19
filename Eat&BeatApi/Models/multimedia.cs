@@ -14,14 +14,13 @@ namespace Eat_BeatApi.Models
     
     public partial class multimedia
     {
-        public int idMusician { get; set; }
+        public int idUser { get; set; }
         public int idMultimedia { get; set; }
         public int idMultimediaType { get; set; }
-        public string type { get; set; }
         public string url { get; set; }
         public string size { get; set; }
     
         public virtual multimedia_type multimedia_type { get; set; }
-        public virtual musician musician { get; set; }
+        public virtual user user { get; set; }
     }
 }

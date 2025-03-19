@@ -23,28 +23,27 @@ namespace Eat_BeatApi.Controllers
         public IHttpActionResult Getmusician()
         {
             db.Configuration.LazyLoadingEnabled = false;
-            
-             var musicians = db.musician
-            .Include("users")
-            .Include("musicianGenres")
-            .Include("musicianClassifications")
-            .Include("multimedia")
+
+            var musicians = db.musician
+            .Include(m => m.user)
+            .Include(m => m.classification)
             .Select(m => new
             {
                 idUser = m.idUser,
+                idRol = m.user.idRol,
                 name = m.user.name,
                 email = m.user.email,
                 password = m.user.password,
-                rating = db.perform.Where(p => p.idMusician == m.idUser).Average(p => p.restaurantRate),
+                rating = db.perform.Where(p => p.idMusician == m.idUser).Average(p => p.musicianRate),
                 longitude = m.longitude,
                 latitude = m.latitude,
                 description = m.description,
-                multimedia = m.multimedia.Select(mm => new
+                multimedia = m.user.multimedia.Select(mm => new
                 {
                     idMultimedia = mm.idMultimedia,
                     url = mm.url,
                     size = mm.size,
-                    type = mm.type
+                    type = db.multimedia_type.Where(mt => mt.idMultimediaType == mm.idMultimediaType).Select(mt => mt.name).FirstOrDefault()
                 }).ToList(),
                 genre = m.genre.Select(g => g.name).ToList(),
                 classification = m.classification.Select(c => c.name).ToList()
@@ -53,6 +52,7 @@ namespace Eat_BeatApi.Controllers
             return Ok(musicians);
         }
 
+
         // GET: api/musicians/5
         [ResponseType(typeof(musician))]
         public async Task<IHttpActionResult> Getmusician(int id)
@@ -60,27 +60,25 @@ namespace Eat_BeatApi.Controllers
             IHttpActionResult result;
 
             var musician = await db.musician
-            .Include("users")
-            .Include("musicianGenres")
-            .Include("musicianClassifications")
-            .Include("multimedia")
-            .Where(m => m.idUser == id)
+            .Include(m => m.user)
+            .Include(m => m.classification)
             .Select(m => new
             {
                 idUser = m.idUser,
+                idRol = m.user.idRol,
                 name = m.user.name,
                 email = m.user.email,
                 password = m.user.password,
-                rating = db.perform.Where(p => p.idMusician == m.idUser).Average(p => p.restaurantRate),
+                rating = db.perform.Where(p => p.idMusician == m.idUser).Average(p => p.musicianRate),
                 longitude = m.longitude,
                 latitude = m.latitude,
                 description = m.description,
-                multimedia = m.multimedia.Select(mm => new
+                multimedia = m.user.multimedia.Select(mm => new
                 {
                     idMultimedia = mm.idMultimedia,
                     url = mm.url,
                     size = mm.size,
-                    type = mm.type
+                    type = db.multimedia_type.Where(mt => mt.idMultimediaType == mm.idMultimediaType).Select(mt => mt.name).FirstOrDefault()
                 }).ToList(),
                 genre = m.genre.Select(g => g.name).ToList(),
                 classification = m.classification.Select(c => c.name).ToList()

@@ -18,7 +18,6 @@ namespace Eat_BeatApi.Models
         public rol()
         {
             this.user = new HashSet<user>();
-            this.user1 = new HashSet<user>();
         }
     
         public int idRol { get; set; }
@@ -26,7 +25,5 @@ namespace Eat_BeatApi.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<user> user { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<user> user1 { get; set; }
     }
 }

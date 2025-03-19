@@ -17,7 +17,6 @@ namespace Eat_BeatApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public musician()
         {
-            this.multimedia = new HashSet<multimedia>();
             this.chat = new HashSet<chat>();
             this.perform = new HashSet<perform>();
             this.classification = new HashSet<classification>();
@@ -29,8 +28,6 @@ namespace Eat_BeatApi.Models
         public Nullable<decimal> latitude { get; set; }
         public string description { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<multimedia> multimedia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<chat> chat { get; set; }
         public virtual user user { get; set; }
