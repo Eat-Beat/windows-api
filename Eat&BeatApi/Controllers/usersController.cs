@@ -17,11 +17,33 @@ namespace Eat_BeatApi.Controllers
         private Entities db = new Entities();
 
         // GET: api/users
+        [ResponseType(typeof(user))]
         public IHttpActionResult Getuser()
         {
             db.Configuration.LazyLoadingEnabled = false;
 
             var users = db.user
+                .Select(u => new
+                {
+                    idUser = u.idUser,
+                    idRol = u.idRol,
+                    name = u.name,
+                    email = u.email,
+                    password = u.password
+                })
+                .ToList();
+
+            return Ok(users);
+        }
+
+        [HttpGet]
+        [Route("api/users/desktop")]
+        public IHttpActionResult GetDesktopUsers()
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+
+            var users = db.user
+                .Where(u => u.idRol > 2)
                 .Select(u => new
                 {
                     idUser = u.idUser,

@@ -38,6 +38,52 @@ namespace Eat_BeatApi.Controllers
             return Ok(performs);
         }
 
+        [HttpGet]
+        [Route("api/performs/musician/{id}")]
+        public IHttpActionResult GetPerformsByIdMusician(int id)
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+
+            var performs = db.perform
+                .Where(p => p.idMusician == id)
+                .Select(p => new
+                {
+                    idPerform = p.idPerform,
+                    idMusician = p.idMusician,
+                    idRestaurant = p.idRestaurant,
+                    dateTime = p.dateTime,
+                    budget = p.budget,
+                    musicianRate = p.musicianRate,
+                    restaurantRate = p.restaurantRate
+                })
+                .ToList();
+
+            return Ok(performs);
+        }
+
+        [HttpGet]
+        [Route("api/performs/restaurant/{id}")]
+        public IHttpActionResult GetPerformsByIdRestaurant(int id)
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+
+            var performs = db.perform
+                .Where(p => p.idRestaurant == id)
+                .Select(p => new
+                {
+                    idPerform = p.idPerform,
+                    idMusician = p.idMusician,
+                    idRestaurant = p.idRestaurant,
+                    dateTime = p.dateTime,
+                    budget = p.budget,
+                    musicianRate = p.musicianRate,
+                    restaurantRate = p.restaurantRate
+                })
+                .ToList();
+
+            return Ok(performs);
+        }
+
         // GET: api/performs/5
         [ResponseType(typeof(perform))]
         public async Task<IHttpActionResult> Getperform(int id)

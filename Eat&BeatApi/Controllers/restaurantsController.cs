@@ -36,7 +36,16 @@ namespace Eat_BeatApi.Controllers
                     rating = db.perform.Where(p => p.idRestaurant == r.idUser).Average(p => p.restaurantRate),
                     address = r.address,
                     addressNum = r.addressNum,
-                    zipCode = r.zipCode
+                    zipCode = r.zipCode,
+                    multimedia = r.user.multimedia
+                        .Where(mm => mm.idMultimedia == 1)
+                        .Select(mm => new
+                        {
+                            idMultimedia = mm.idMultimedia,
+                            url = mm.url,
+                            size = mm.size,
+                            type = db.multimedia_type.Where(mt => mt.idMultimediaType == mm.idMultimediaType).Select(mt => mt.name).FirstOrDefault()
+                        }).FirstOrDefault(),
                 })
                 .ToList();
 
