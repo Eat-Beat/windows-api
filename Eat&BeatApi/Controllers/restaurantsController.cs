@@ -33,7 +33,11 @@ namespace Eat_BeatApi.Controllers
                     name = r.user.name,
                     email = r.user.email,
                     password = r.user.password,
-                    rating = db.perform.Where(p => p.idRestaurant == r.idUser).Average(p => p.restaurantRate),
+                    rating = db.perform
+                        .Where(p => p.idRestaurant == r.idUser)
+                        .Select(p => (double?)p.restaurantRate)
+                        .DefaultIfEmpty(0) 
+                        .Average(),
                     address = r.address,
                     addressNum = r.addressNum,
                     zipCode = r.zipCode,
@@ -68,7 +72,11 @@ namespace Eat_BeatApi.Controllers
                 name = r.user.name,
                 email = r.user.email,
                 password = r.user.password, 
-                rating = db.perform.Where(p => p.idRestaurant == r.idUser).Average(p => p.restaurantRate), 
+                rating = db.perform
+                    .Where(p => p.idRestaurant == r.idUser)
+                    .Select(p => (double?)p.restaurantRate)
+                    .DefaultIfEmpty(0)
+                    .Average(),
                 address = r.address,
                 addressNum = r.addressNum,
                 zipCode = r.zipCode
