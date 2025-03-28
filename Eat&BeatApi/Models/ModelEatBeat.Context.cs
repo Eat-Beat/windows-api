@@ -25,6 +25,7 @@ namespace Eat_BeatApi.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<chat> chat { get; set; }
         public virtual DbSet<classification> classification { get; set; }
         public virtual DbSet<genre> genre { get; set; }
         public virtual DbSet<multimedia> multimedia { get; set; }
@@ -34,6 +35,5 @@ namespace Eat_BeatApi.Models
         public virtual DbSet<restaurant> restaurant { get; set; }
         public virtual DbSet<rol> rol { get; set; }
         public virtual DbSet<user> user { get; set; }
-        public virtual DbSet<chat> chat { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿// La generación de código T4 está habilitada para el modelo 'D:\Escritorio\cosas m6\Eat&BeatApi\Eat&BeatApi\Models\ModelEatBeat.edmx'. 
+﻿// La generación de código T4 está habilitada para el modelo 'C:\Users\ivann\source\repos\Eat-Beat\windows-api\Eat&BeatApi\Models\ModelEatBeat.edmx'. 
 // Para habilitar la generación de código heredada, cambie el valor de la propiedad del diseñador 'Estrategia de generación de código'
 // por 'ObjectContext heredado'. Esta propiedad está disponible en la ventana Propiedades cuando se abre
 // el modelo en el diseñador.

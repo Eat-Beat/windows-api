@@ -16,120 +16,100 @@ namespace Eat_BeatApi.Controllers
     {
         private Entities db = new Entities();
 
-        // GET: api/chats
-        public IQueryable<chat> Getchat()
+        [HttpGet]
+        [Route("api/chats/restaurant/{id}")]
+        public IHttpActionResult GetRestaurantChat(int id)
         {
             db.Configuration.LazyLoadingEnabled = false;
 
-            return db.chat;
-        }
+            var chats = db.chat
+                .Where(c => c.idRestaurant == id)
+                .Select(c => new
+                {
+                    c.idRestaurant,
+                    c.idMusician,
+                    c.idSender,
+                    c.isMultimedia,
+                    c.message,
+                    c.timestamp
+                })
+                .ToList();
 
-        // GET: api/chats/5
-        [ResponseType(typeof(chat))]
-        public IHttpActionResult Getchat(int id)
-        {
-            chat chat = db.chat.Find(id);
-            if (chat == null)
+            if (!chats.Any())
             {
                 return NotFound();
             }
 
-            return Ok(chat);
+            return Ok(chats);
         }
 
-        // PUT: api/chats/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult Putchat(int id, chat chat)
+        [HttpGet]
+        [Route("api/chats/musician/{id}")]
+        public IHttpActionResult GetMusicianChat(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            db.Configuration.LazyLoadingEnabled = false;
 
-            if (id != chat.idRestaurant)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(chat).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!chatExists(id))
+            var chats = db.chat
+                .Where(c => c.idMusician == id)
+                .Select(c => new
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                    c.idRestaurant,
+                    c.idMusician,
+                    c.idSender,
+                    c.isMultimedia,
+                    c.message,
+                    c.timestamp
+                })
+                .ToList();
+
+            if (!chats.Any())
+            {
+                return NotFound();
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(chats);
         }
 
         // POST: api/chats
         [ResponseType(typeof(chat))]
-        public IHttpActionResult Postchat(chat chat)
+        public IHttpActionResult Postchat([FromBody] chat chat)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+            // Validar que los IDs existan en la base de datos antes de insertar
+            bool restaurantExists = db.restaurant.Any(r => r.idUser == chat.idRestaurant);
+            bool musicianExists = db.musician.Any(m => m.idUser == chat.idMusician);
+            bool senderExists = db.user.Any(u => u.idUser == chat.idSender);
+
+            if (!restaurantExists)
+            {
+                return BadRequest("El idRestaurant no existe.");
+            }
+            if (!musicianExists)
+            {
+                return BadRequest("El idMusician no existe.");
+            }
+            if (!senderExists)
+            {
+                return BadRequest("El idSender no existe.");
+            }
+
+            // Agregar el chat a la base de datos
             db.chat.Add(chat);
 
             try
             {
                 db.SaveChanges();
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException ex)
             {
-                if (chatExists(chat.idRestaurant))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                return InternalServerError(ex);
             }
 
             return CreatedAtRoute("DefaultApi", new { id = chat.idRestaurant }, chat);
-        }
-
-        // DELETE: api/chats/5
-        [ResponseType(typeof(chat))]
-        public IHttpActionResult Deletechat(int id)
-        {
-            chat chat = db.chat.Find(id);
-            if (chat == null)
-            {
-                return NotFound();
-            }
-
-            db.chat.Remove(chat);
-            db.SaveChanges();
-
-            return Ok(chat);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool chatExists(int id)
-        {
-            return db.chat.Count(e => e.idRestaurant == id) > 0;
         }
     }
 }
