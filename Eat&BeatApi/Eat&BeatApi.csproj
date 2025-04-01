@@ -177,6 +177,7 @@
     <Compile Include="Clases\Utilitat.cs" />
     <Compile Include="Controllers\chatsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\multimediasController.cs" />
     <Compile Include="Controllers\musiciansController.cs" />
     <Compile Include="Controllers\performsController.cs" />
     <Compile Include="Controllers\restaurantsController.cs" />
