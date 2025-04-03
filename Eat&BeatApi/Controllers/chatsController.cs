@@ -70,6 +70,33 @@ namespace Eat_BeatApi.Controllers
             return Ok(chats);
         }
 
+        [HttpGet]
+        [Route("api/chats/{idRestaurant}/{idMusician}")]
+        public IHttpActionResult GetChatBetweenRestaurantAndMusician(int idRestaurant, int idMusician)
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+
+            var chats = db.chat
+                .Where(c => c.idRestaurant == idRestaurant && c.idMusician == idMusician)
+                .Select(c => new
+                {
+                    c.idRestaurant,
+                    c.idMusician,
+                    c.idSender,
+                    c.isMultimedia,
+                    c.message,
+                    c.timestamp
+                })
+                .ToList();
+
+            if (!chats.Any())
+            {
+                return NotFound();
+            }
+
+            return Ok(chats);
+        }
+
         // POST: api/chats
         [ResponseType(typeof(chat))]
         public IHttpActionResult Postchat([FromBody] chat chat)
