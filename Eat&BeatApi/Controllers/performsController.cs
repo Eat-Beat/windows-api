@@ -109,15 +109,13 @@ namespace Eat_BeatApi.Controllers
         }
 
         [HttpGet]
-        [Route("api/performs/profile/musician/{id}")]
+        [Route("api/performs/profile/restaurant/{id}")]
         public IHttpActionResult GetPerformsProfileByIdRestaurant(int id)
         {
             db.Configuration.LazyLoadingEnabled = false;
 
             var performs = db.perform
-                .Include(p => p.restaurant)
-                .Include(p => p.restaurant.user)
-                .Where(p => p.idMusician == id)
+                .Where(p => p.idRestaurant == id)
                 .Select(p => new
                 {
                     name = p.restaurant.user.name,
