@@ -96,104 +96,64 @@ namespace Eat_BeatApi.Controllers
         }
 
         // PUT: api/restaurants/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> Putrestaurant(int id, restaurant restaurant)
+        [HttpPut]
+        [Route("api/restaurants/{id}")]
+        public async Task<IHttpActionResult> PutRestaurant(int id, restaurant restaurant)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != restaurant.idUser)
-            {
-                return BadRequest();
-            }
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (id != restaurant.idUser) return BadRequest();
 
             db.Entry(restaurant).State = EntityState.Modified;
 
             try
             {
                 await db.SaveChangesAsync();
+                return StatusCode(HttpStatusCode.NoContent);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!restaurantExists(id))
-                {
+                if (!db.restaurant.Any(r => r.idUser == id))
                     return NotFound();
-                }
                 else
-                {
                     throw;
-                }
             }
-
-            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/restaurants
         [ResponseType(typeof(restaurant))]
-        public async Task<IHttpActionResult> Postrestaurant(restaurant restaurant)
+        [HttpPost]
+        [Route("api/restaurants")]
+        public async Task<IHttpActionResult> PostRestaurant(restaurant restaurant)
         {
-            IHttpActionResult result;
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            if (!ModelState.IsValid)
+            db.restaurant.Add(restaurant);
+            try
             {
-                result = BadRequest(ModelState);
+                await db.SaveChangesAsync();
+                return CreatedAtRoute("DefaultApi", new { id = restaurant.idUser }, restaurant);
             }
-            else
+            catch (DbUpdateException)
             {
-                db.restaurant.Add(restaurant);
-
-                try
-                {
-                    await db.SaveChangesAsync();
-                    result = CreatedAtRoute("DefaultApi", new { id = restaurant.idUser }, restaurant);
-                }
-                catch (DbUpdateException)
-                {
-                    if (restaurantExists(restaurant.idUser))
-                    {
-                        result = Conflict();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                if (db.restaurant.Any(r => r.idUser == restaurant.idUser))
+                    return Conflict();
+                else
+                    throw;
             }
-
-            return result;
         }
 
         // DELETE: api/restaurants/5
-        [ResponseType(typeof(restaurant))]
-        public async Task<IHttpActionResult> Deleterestaurant(int id)
+        [HttpDelete]
+        [Route("api/restaurants/{id}")]
+        public async Task<IHttpActionResult> DeleteRestaurant(int id)
         {
-            IHttpActionResult result;
+            var restaurant = await db.restaurant.FindAsync(id);
+            if (restaurant == null) return NotFound();
 
-            restaurant restaurant = await db.restaurant.FindAsync(id);
-            if (restaurant == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                try
-                {
-                    db.restaurant.Remove(restaurant);
-                    await db.SaveChangesAsync();
-                    result = Ok(restaurant);
-                }
-                catch (DbUpdateException ex)
-                {
-                    String missatge = "";
-                    SqlException sqlException = (SqlException)ex.InnerException.InnerException;
-                    missatge = Utilitat.MissatgeError(sqlException);
-                    result = BadRequest(missatge);
-                }
-            }
+            db.restaurant.Remove(restaurant);
+            await db.SaveChangesAsync();
 
-            return result;
+            return Ok(restaurant);
         }
 
         protected override void Dispose(bool disposing)

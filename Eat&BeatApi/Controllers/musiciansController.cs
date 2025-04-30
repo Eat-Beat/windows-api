@@ -106,103 +106,63 @@ namespace Eat_BeatApi.Controllers
         }
 
         // PUT: api/musicians/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> Putmusician(int id, musician musician)
+        [HttpPut]
+        [Route("api/musicians/{id}")]
+        public async Task<IHttpActionResult> PutMusician(int id, musician musician)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != musician.idUser)
-            {
-                return BadRequest();
-            }
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (id != musician.idUser) return BadRequest();
 
             db.Entry(musician).State = EntityState.Modified;
 
             try
             {
                 await db.SaveChangesAsync();
+                return StatusCode(HttpStatusCode.NoContent);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!musicianExists(id))
-                {
+                if (!db.musician.Any(m => m.idUser == id))
                     return NotFound();
-                }
                 else
-                {
                     throw;
-                }
             }
-
-            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/musicians
-        [ResponseType(typeof(musician))]
-        public async Task<IHttpActionResult> Postmusician(musician musician)
+        [HttpPost]
+        [Route("api/musicians")]
+        public async Task<IHttpActionResult> PostMusician(musician musician)
         {
-            IHttpActionResult result;
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            if (!ModelState.IsValid)
+            db.musician.Add(musician);
+            try
             {
-                result = BadRequest(ModelState);
+                await db.SaveChangesAsync();
+                return CreatedAtRoute("DefaultApi", new { id = musician.idUser }, musician);
             }
-            else
+            catch (DbUpdateException)
             {
-                db.musician.Add(musician);
-
-                try
-                {
-                    await db.SaveChangesAsync();
-                    result = CreatedAtRoute("DefaultApi", new { id = musician.idUser }, musician);
-                }
-                catch (DbUpdateException)
-                {
-                    if (musicianExists(musician.idUser))
-                    {
-                        result = Conflict();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                if (db.musician.Any(m => m.idUser == musician.idUser))
+                    return Conflict();
+                else
+                    throw;
             }
-
-            return result;
         }
 
         // DELETE: api/musicians/5
-        [ResponseType(typeof(musician))]
-        public async Task<IHttpActionResult> Deletemusician(int id)
+        [HttpDelete]
+        [Route("api/musicians/{id}")]
+        public async Task<IHttpActionResult> DeleteMusician(int id)
         {
-            IHttpActionResult result;
+            var musician = await db.musician.FindAsync(id);
+            if (musician == null) return NotFound();
 
-            musician _musician = await db.musician.FindAsync(id);
-            if (_musician == null)
-            {
-                result = NotFound();
-            }
-            else
-            {
-                try
-                {
-                    db.musician.Remove(_musician);
-                    await db.SaveChangesAsync();
-                    result = Ok(_musician);
-                }
-                catch (DbUpdateException ex)
-                {
-                    String missatge = "";
-                    SqlException sqlException = (SqlException)ex.InnerException.InnerException;
-                    missatge = Utilitat.MissatgeError(sqlException);
-                    result = BadRequest(missatge);
-                }
-            }
-            return result;
+            db.musician.Remove(musician);
+            await db.SaveChangesAsync();
+
+            return Ok(musician);
         }
 
         protected override void Dispose(bool disposing)

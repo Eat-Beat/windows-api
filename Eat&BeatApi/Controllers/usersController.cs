@@ -101,7 +101,17 @@ namespace Eat_BeatApi.Controllers
                 return BadRequest();
             }
 
-            db.Entry(user).State = EntityState.Modified;
+            var existingUser = await db.user.FindAsync(id);
+            if (existingUser == null)
+            {
+                return NotFound();
+            }
+
+            // Solo actualizamos campos definidos
+            existingUser.name = user.name;
+            existingUser.email = user.email;
+            existingUser.password = user.password;
+            existingUser.idRol = user.idRol;
 
             try
             {
@@ -109,7 +119,7 @@ namespace Eat_BeatApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!userExists(id))
+                if (!UserExists(id))
                 {
                     return NotFound();
                 }
@@ -132,20 +142,32 @@ namespace Eat_BeatApi.Controllers
             }
 
             db.user.Add(user);
-            await db.SaveChangesAsync();
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (UserExists(user.idUser))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return CreatedAtRoute("DefaultApi", new { id = user.idUser }, user);
         }
 
         // DELETE: api/users/5
-        [ResponseType(typeof(user))]
-        public async Task<IHttpActionResult> Deleteuser(int id)
+        [HttpDelete]
+        [Route("api/users/{id}")]
+        public async Task<IHttpActionResult> DeleteUser(int id)
         {
-            user user = await db.user.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
+            var user = await db.user.FindAsync(id);
+            if (user == null) return NotFound();
 
             db.user.Remove(user);
             await db.SaveChangesAsync();
@@ -162,7 +184,7 @@ namespace Eat_BeatApi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool userExists(int id)
+        private bool UserExists(int id)
         {
             return db.user.Count(e => e.idUser == id) > 0;
         }
